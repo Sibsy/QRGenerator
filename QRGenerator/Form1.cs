@@ -17,6 +17,7 @@ namespace QRGenerator
             btnLogoBGColor.BackColor = logoBGColor;
             buttonDarkColor.BackColor = darkColor;
             buttonLightColor.BackColor = lightColor;
+            comboBoxWifiType.DataSource = Enum.GetValues(typeof(PayloadGenerator.WiFi.Authentication)).Cast<PayloadGenerator.WiFi.Authentication>();
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
@@ -29,8 +30,13 @@ namespace QRGenerator
         private Bitmap generateQRCode()
         {
             string payload = "";
-            if (String.IsNullOrEmpty(txtBxPayload.Text))
-                payload = "BaseExampleString";
+            if(checkBoxWifi.Checked)
+            {
+                PayloadGenerator.WiFi wifiPayLoad = new PayloadGenerator.WiFi(textBoxSSID.Text, textBoxPass.Text, (PayloadGenerator.WiFi.Authentication)comboBoxWifiType.SelectedItem, checkBoxHiddenSSID.Checked);
+                payload = wifiPayLoad.ToString();
+            }
+            else if (String.IsNullOrEmpty(txtBxPayload.Text))
+                payload = "Example Text";
             else
                 payload = txtBxPayload.Text;
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
@@ -108,6 +114,26 @@ namespace QRGenerator
                     MessageBox.Show("File Saved Successfully");
             }
             
+        }
+
+        private void checkBoxWifi_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxWifi.Checked)
+            {
+                txtBxPayload.Enabled = false;
+                textBoxPass.Enabled = true;
+                textBoxSSID.Enabled = true;
+                comboBoxWifiType.Enabled = true;
+
+            }
+            else
+            {
+                txtBxPayload.Enabled = true;
+                textBoxPass.Enabled = false;
+                textBoxSSID.Enabled = false;
+                comboBoxWifiType.Enabled = false;
+            }
+
         }
     }
 }
