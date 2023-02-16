@@ -260,20 +260,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(108, 80);
+            this.label4.Location = new System.Drawing.Point(94, 86);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
+            this.label4.Size = new System.Drawing.Size(71, 15);
             this.label4.TabIndex = 4;
-            this.label4.Text = "label4";
+            this.label4.Text = "QR Colour 2";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(102, 52);
+            this.label3.Location = new System.Drawing.Point(94, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.Size = new System.Drawing.Size(71, 15);
             this.label3.TabIndex = 3;
-            this.label3.Text = "label3";
+            this.label3.Text = "QR Colour 1";
             // 
             // buttonLightColor
             // 
