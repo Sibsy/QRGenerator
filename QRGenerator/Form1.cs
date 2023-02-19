@@ -1,3 +1,4 @@
+using QRCodeDecoderLibrary;
 using QRCoder;
 using System.Drawing.Imaging;
 
@@ -71,8 +72,30 @@ namespace QRGenerator
                 qrImage = qrCode.GetGraphic(50, this.darkColor, this.lightColor, icon: iconBitmap, iconSizePercent: ((int)numericUpDownLogoSize.Value), iconBorderWidth: (int)numericUpDownBorderWidth.Value, iconBackgroundColor: this.logoBGColor, drawQuietZones: checkBoxQuietZone.Checked);
             }
             else qrImage = qrCode.GetGraphic(20, this.darkColor, this.lightColor, checkBoxQuietZone.Checked);
-            image = qrImage;
-            return true;
+            var res =  this.ValidateQRCode(qrImage);
+            if (res == true)
+            {
+                image = qrImage;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Validating the QR Code Failed");
+                image= null;
+                return false;
+            }
+
+        }
+
+        private bool ValidateQRCode(Bitmap qrcode)
+        {
+            QRDecoder decoder = new QRDecoder();
+            var result= decoder.ImageDecoder(qrcode);
+            if (result != null)
+            {
+                return true;
+            }
+            else return false;
 
         }
 

@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="QRCodeDecoderLibrary" Version="2.0.1" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
   </ItemGroup>
 
