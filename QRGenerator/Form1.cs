@@ -22,23 +22,45 @@ namespace QRGenerator
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            var qrCodeImage = this.generateQRCode();
-            pictureBoxPreview.Image = qrCodeImage;
-            pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
+            var qrCodeResult = this.generateQRCode(out Bitmap? qrCodeImage);
+            if (qrCodeResult == true && qrCodeImage != null)
+            {
+                pictureBoxPreview.Image = qrCodeImage;
+                pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
 
-        private Bitmap generateQRCode()
+       
+
+        private bool generateQRCode(out Bitmap? image)
         {
             string payload = "";
-            if(checkBoxWifi.Checked)
+            switch(tabControlType.SelectedTab.Name)
             {
-                PayloadGenerator.WiFi wifiPayLoad = new PayloadGenerator.WiFi(textBoxSSID.Text, textBoxPass.Text, (PayloadGenerator.WiFi.Authentication)comboBoxWifiType.SelectedItem, checkBoxHiddenSSID.Checked);
-                payload = wifiPayLoad.ToString();
+                case "tabPageText":
+                    payload = txtBxPayload.Text;
+                    if(string.IsNullOrEmpty(payload)) { 
+                        MessageBox.Show("Must input text to generate code", "Missing Text");
+                        image = null;
+                        return false;
+                    }
+                    break;
+                case "tabPageWiFi":
+                    if (string.IsNullOrEmpty(textBoxSSID.Text) || string.IsNullOrEmpty(textBoxPass.Text))
+                    {
+                        MessageBox.Show("Must input wifi ssid and pass to generate code", "Missing WiFi Details");
+                        image = null;
+                        return false;
+                    }
+                    PayloadGenerator.WiFi wifiPayLoad = new PayloadGenerator.WiFi(textBoxSSID.Text, textBoxPass.Text, (PayloadGenerator.WiFi.Authentication)comboBoxWifiType.SelectedItem, checkBoxHiddenSSID.Checked);
+                    payload = wifiPayLoad.ToString();
+                    break;
+                default:
+                    payload = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                    break;
             }
-            else if (String.IsNullOrEmpty(txtBxPayload.Text))
-                payload = "Example Text";
-            else
-                payload = txtBxPayload.Text;
+  
+               
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeDate = qrGenerator.CreateQrCode(payload, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeDate);
@@ -49,7 +71,8 @@ namespace QRGenerator
                 qrImage = qrCode.GetGraphic(50, this.darkColor, this.lightColor, icon: iconBitmap, iconSizePercent: ((int)numericUpDownLogoSize.Value), iconBorderWidth: (int)numericUpDownBorderWidth.Value, iconBackgroundColor: this.logoBGColor, drawQuietZones: checkBoxQuietZone.Checked);
             }
             else qrImage = qrCode.GetGraphic(20, this.darkColor, this.lightColor, checkBoxQuietZone.Checked);
-            return qrImage;
+            image = qrImage;
+            return true;
 
         }
 
@@ -108,32 +131,16 @@ namespace QRGenerator
             saveFileDialog.Title = "Save QR Code";
             if(saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var code = this.generateQRCode();
-                code.Save(saveFileDialog.FileName);
-                if (File.Exists(saveFileDialog.FileName))
-                    MessageBox.Show("File Saved Successfully");
+                var qrCodeResult = this.generateQRCode(out Bitmap? qrCodeImage);
+                if (qrCodeResult == true && qrCodeImage != null)
+                {
+                    pictureBoxPreview.Image = qrCodeImage;
+                    pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
+                    qrCodeImage!.Save(saveFileDialog.FileName);
+                    if (File.Exists(saveFileDialog.FileName))
+                        MessageBox.Show("File Saved Successfully");
+                }
             }
-            
-        }
-
-        private void checkBoxWifi_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.checkBoxWifi.Checked)
-            {
-                txtBxPayload.Enabled = false;
-                textBoxPass.Enabled = true;
-                textBoxSSID.Enabled = true;
-                comboBoxWifiType.Enabled = true;
-
-            }
-            else
-            {
-                txtBxPayload.Enabled = true;
-                textBoxPass.Enabled = false;
-                textBoxSSID.Enabled = false;
-                comboBoxWifiType.Enabled = false;
-            }
-
         }
     }
 }

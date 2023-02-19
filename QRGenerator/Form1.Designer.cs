@@ -55,7 +55,6 @@
             this.colorDialogLogoBGColor = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.txtBxPayload = new System.Windows.Forms.TextBox();
-            this.gbWifi = new System.Windows.Forms.GroupBox();
             this.checkBoxHiddenSSID = new System.Windows.Forms.CheckBox();
             this.lblPass = new System.Windows.Forms.Label();
             this.lblSSID = new System.Windows.Forms.Label();
@@ -63,7 +62,9 @@
             this.comboBoxWifiType = new System.Windows.Forms.ComboBox();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.textBoxSSID = new System.Windows.Forms.TextBox();
-            this.checkBoxWifi = new System.Windows.Forms.CheckBox();
+            this.tabControlType = new System.Windows.Forms.TabControl();
+            this.tabPageText = new System.Windows.Forms.TabPage();
+            this.tabPageWiFi = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.grpBxIncImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBorderWidth)).BeginInit();
@@ -71,12 +72,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagePreview)).BeginInit();
             this.grpBxConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDetail)).BeginInit();
-            this.gbWifi.SuspendLayout();
+            this.tabControlType.SuspendLayout();
+            this.tabPageText.SuspendLayout();
+            this.tabPageWiFi.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(498, 316);
+            this.btnPreview.Location = new System.Drawing.Point(489, 366);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(75, 23);
             this.btnPreview.TabIndex = 0;
@@ -86,7 +89,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(721, 316);
+            this.btnSave.Location = new System.Drawing.Point(692, 366);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -96,9 +99,9 @@
             // 
             // pictureBoxPreview
             // 
-            this.pictureBoxPreview.Location = new System.Drawing.Point(498, 12);
+            this.pictureBoxPreview.Location = new System.Drawing.Point(477, 12);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(298, 298);
+            this.pictureBoxPreview.Size = new System.Drawing.Size(319, 321);
             this.pictureBoxPreview.TabIndex = 2;
             this.pictureBoxPreview.TabStop = false;
             // 
@@ -113,7 +116,7 @@
             this.grpBxIncImage.Controls.Add(this.btnLoadImage);
             this.grpBxIncImage.Controls.Add(this.pictureBoxImagePreview);
             this.grpBxIncImage.Controls.Add(this.checkBoxIncludeImage);
-            this.grpBxIncImage.Location = new System.Drawing.Point(12, 188);
+            this.grpBxIncImage.Location = new System.Drawing.Point(197, 344);
             this.grpBxIncImage.Name = "grpBxIncImage";
             this.grpBxIncImage.Size = new System.Drawing.Size(274, 155);
             this.grpBxIncImage.TabIndex = 3;
@@ -224,9 +227,9 @@
             this.grpBxConfig.Controls.Add(this.buttonLightColor);
             this.grpBxConfig.Controls.Add(this.buttonDarkColor);
             this.grpBxConfig.Controls.Add(this.checkBoxQuietZone);
-            this.grpBxConfig.Location = new System.Drawing.Point(292, 187);
+            this.grpBxConfig.Location = new System.Drawing.Point(22, 343);
             this.grpBxConfig.Name = "grpBxConfig";
-            this.grpBxConfig.Size = new System.Drawing.Size(200, 156);
+            this.grpBxConfig.Size = new System.Drawing.Size(169, 156);
             this.grpBxConfig.TabIndex = 6;
             this.grpBxConfig.TabStop = false;
             this.grpBxConfig.Text = "Config";
@@ -310,33 +313,16 @@
             // 
             // txtBxPayload
             // 
-            this.txtBxPayload.Location = new System.Drawing.Point(12, 12);
+            this.txtBxPayload.Location = new System.Drawing.Point(6, 6);
             this.txtBxPayload.Multiline = true;
             this.txtBxPayload.Name = "txtBxPayload";
-            this.txtBxPayload.Size = new System.Drawing.Size(274, 170);
+            this.txtBxPayload.Size = new System.Drawing.Size(365, 236);
             this.txtBxPayload.TabIndex = 5;
-            // 
-            // gbWifi
-            // 
-            this.gbWifi.Controls.Add(this.checkBoxHiddenSSID);
-            this.gbWifi.Controls.Add(this.lblPass);
-            this.gbWifi.Controls.Add(this.lblSSID);
-            this.gbWifi.Controls.Add(this.lblType);
-            this.gbWifi.Controls.Add(this.comboBoxWifiType);
-            this.gbWifi.Controls.Add(this.textBoxPass);
-            this.gbWifi.Controls.Add(this.textBoxSSID);
-            this.gbWifi.Controls.Add(this.checkBoxWifi);
-            this.gbWifi.Location = new System.Drawing.Point(292, 12);
-            this.gbWifi.Name = "gbWifi";
-            this.gbWifi.Size = new System.Drawing.Size(200, 169);
-            this.gbWifi.TabIndex = 8;
-            this.gbWifi.TabStop = false;
-            this.gbWifi.Text = "Wifi?";
             // 
             // checkBoxHiddenSSID
             // 
             this.checkBoxHiddenSSID.AutoSize = true;
-            this.checkBoxHiddenSSID.Location = new System.Drawing.Point(10, 142);
+            this.checkBoxHiddenSSID.Location = new System.Drawing.Point(42, 122);
             this.checkBoxHiddenSSID.Name = "checkBoxHiddenSSID";
             this.checkBoxHiddenSSID.Size = new System.Drawing.Size(91, 19);
             this.checkBoxHiddenSSID.TabIndex = 7;
@@ -346,7 +332,7 @@
             // lblPass
             // 
             this.lblPass.AutoSize = true;
-            this.lblPass.Location = new System.Drawing.Point(6, 116);
+            this.lblPass.Location = new System.Drawing.Point(6, 90);
             this.lblPass.Name = "lblPass";
             this.lblPass.Size = new System.Drawing.Size(30, 15);
             this.lblPass.TabIndex = 6;
@@ -355,7 +341,7 @@
             // lblSSID
             // 
             this.lblSSID.AutoSize = true;
-            this.lblSSID.Location = new System.Drawing.Point(6, 90);
+            this.lblSSID.Location = new System.Drawing.Point(7, 56);
             this.lblSSID.Name = "lblSSID";
             this.lblSSID.Size = new System.Drawing.Size(30, 15);
             this.lblSSID.TabIndex = 5;
@@ -364,7 +350,7 @@
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(6, 56);
+            this.lblType.Location = new System.Drawing.Point(6, 20);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(31, 15);
             this.lblType.TabIndex = 4;
@@ -372,48 +358,71 @@
             // 
             // comboBoxWifiType
             // 
-            this.comboBoxWifiType.Enabled = false;
             this.comboBoxWifiType.FormattingEnabled = true;
-            this.comboBoxWifiType.Location = new System.Drawing.Point(43, 53);
+            this.comboBoxWifiType.Location = new System.Drawing.Point(43, 17);
             this.comboBoxWifiType.Name = "comboBoxWifiType";
             this.comboBoxWifiType.Size = new System.Drawing.Size(151, 23);
             this.comboBoxWifiType.TabIndex = 3;
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Enabled = false;
-            this.textBoxPass.Location = new System.Drawing.Point(42, 113);
+            this.textBoxPass.Location = new System.Drawing.Point(42, 82);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(152, 23);
             this.textBoxPass.TabIndex = 2;
             // 
             // textBoxSSID
             // 
-            this.textBoxSSID.Enabled = false;
-            this.textBoxSSID.Location = new System.Drawing.Point(42, 81);
+            this.textBoxSSID.Location = new System.Drawing.Point(43, 53);
             this.textBoxSSID.Name = "textBoxSSID";
             this.textBoxSSID.Size = new System.Drawing.Size(152, 23);
             this.textBoxSSID.TabIndex = 1;
             // 
-            // checkBoxWifi
+            // tabControlType
             // 
-            this.checkBoxWifi.AutoSize = true;
-            this.checkBoxWifi.Location = new System.Drawing.Point(8, 28);
-            this.checkBoxWifi.Name = "checkBoxWifi";
-            this.checkBoxWifi.Size = new System.Drawing.Size(134, 19);
-            this.checkBoxWifi.TabIndex = 0;
-            this.checkBoxWifi.Text = "Create Wifi QR Code";
-            this.checkBoxWifi.UseVisualStyleBackColor = true;
-            this.checkBoxWifi.CheckedChanged += new System.EventHandler(this.checkBoxWifi_CheckedChanged);
+            this.tabControlType.Controls.Add(this.tabPageText);
+            this.tabControlType.Controls.Add(this.tabPageWiFi);
+            this.tabControlType.Location = new System.Drawing.Point(12, 12);
+            this.tabControlType.Name = "tabControlType";
+            this.tabControlType.SelectedIndex = 0;
+            this.tabControlType.Size = new System.Drawing.Size(459, 325);
+            this.tabControlType.TabIndex = 9;
+            // 
+            // tabPageText
+            // 
+            this.tabPageText.Controls.Add(this.txtBxPayload);
+            this.tabPageText.Location = new System.Drawing.Point(4, 24);
+            this.tabPageText.Name = "tabPageText";
+            this.tabPageText.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageText.Size = new System.Drawing.Size(451, 297);
+            this.tabPageText.TabIndex = 0;
+            this.tabPageText.Text = "Text";
+            this.tabPageText.UseVisualStyleBackColor = true;
+            // 
+            // tabPageWiFi
+            // 
+            this.tabPageWiFi.Controls.Add(this.checkBoxHiddenSSID);
+            this.tabPageWiFi.Controls.Add(this.textBoxPass);
+            this.tabPageWiFi.Controls.Add(this.lblPass);
+            this.tabPageWiFi.Controls.Add(this.lblSSID);
+            this.tabPageWiFi.Controls.Add(this.textBoxSSID);
+            this.tabPageWiFi.Controls.Add(this.lblType);
+            this.tabPageWiFi.Controls.Add(this.comboBoxWifiType);
+            this.tabPageWiFi.Location = new System.Drawing.Point(4, 24);
+            this.tabPageWiFi.Name = "tabPageWiFi";
+            this.tabPageWiFi.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWiFi.Size = new System.Drawing.Size(451, 297);
+            this.tabPageWiFi.TabIndex = 1;
+            this.tabPageWiFi.Text = "WiFi";
+            this.tabPageWiFi.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 350);
-            this.Controls.Add(this.gbWifi);
+            this.ClientSize = new System.Drawing.Size(807, 551);
+            this.Controls.Add(this.tabControlType);
             this.Controls.Add(this.grpBxConfig);
-            this.Controls.Add(this.txtBxPayload);
             this.Controls.Add(this.grpBxIncImage);
             this.Controls.Add(this.pictureBoxPreview);
             this.Controls.Add(this.btnSave);
@@ -429,10 +438,12 @@
             this.grpBxConfig.ResumeLayout(false);
             this.grpBxConfig.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDetail)).EndInit();
-            this.gbWifi.ResumeLayout(false);
-            this.gbWifi.PerformLayout();
+            this.tabControlType.ResumeLayout(false);
+            this.tabPageText.ResumeLayout(false);
+            this.tabPageText.PerformLayout();
+            this.tabPageWiFi.ResumeLayout(false);
+            this.tabPageWiFi.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -464,14 +475,15 @@
         private NumericUpDown numericUpDownDetail;
         private ContextMenuStrip contextMenuStrip1;
         private TextBox txtBxPayload;
-        private GroupBox gbWifi;
         private Label lblPass;
         private Label lblSSID;
         private Label lblType;
         private ComboBox comboBoxWifiType;
         private TextBox textBoxPass;
         private TextBox textBoxSSID;
-        private CheckBox checkBoxWifi;
         private CheckBox checkBoxHiddenSSID;
+        private TabControl tabControlType;
+        private TabPage tabPageText;
+        private TabPage tabPageWiFi;
     }
 }
